@@ -1,0 +1,31 @@
+name: CI-CD-CS Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test-and-scan:
+    [cite_start]runs-on: ubuntu-latest # Menggunakan Linux di server GitHub [cite: 280]
+
+    steps:
+      - name: Checkout Code
+        [cite_start]uses: actions/checkout@v4 [cite: 284]
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        [cite_start]run: npm install [cite: 289]
+
+      - name: Run Security Scan (CS)
+        [cite_start]uses: gitleaks/gitleaks-action@v2 [cite: 294-295]
+        env:
+          [cite_start]GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} [cite: 296]
+
+      - name: Build Docker Image (Verify Dockerfile)
+        [cite_start]run: docker build -t finance-tracker:latest . [cite: 297-298]
