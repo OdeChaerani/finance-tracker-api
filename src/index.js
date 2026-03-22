@@ -111,6 +111,10 @@ app.delete('/transactions/:id', (req, res) => {
     res.status(200).json(formatResponse("OK", "Transaction deleted successfully"));
 });
 
-app.listen(port, () => {
-  console.log(`Server running in http://localhost:${port}`);
-});
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server running in http://localhost:${port}/transactions`);
+    });
+}
+
+module.exports = app;
