@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: finance_tracker_api
+    ports:
+      # Host PORT : Container PORT
+      - "3000:3000"
+    restart: unless-stopped
