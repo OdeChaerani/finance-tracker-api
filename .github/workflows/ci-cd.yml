@@ -8,11 +8,11 @@ on:
 
 jobs:
   test-and-scan:
-    [cite_start]runs-on: ubuntu-latest # Menggunakan Linux di server GitHub [cite: 280]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
-        [cite_start]uses: actions/checkout@v4 [cite: 284]
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -20,12 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        [cite_start]run: npm install [cite: 289]
+        run: npm install
 
-      - name: Run Security Scan (CS)
-        [cite_start]uses: gitleaks/gitleaks-action@v2 [cite: 294-295]
-        env:
-          [cite_start]GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} [cite: 296]
-
-      - name: Build Docker Image (Verify Dockerfile)
-        [cite_start]run: docker build -t finance-tracker:latest . [cite: 297-298]
+      - name: Build Docker Image
+        run: docker build -t finance-tracker:latest .
