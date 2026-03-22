@@ -23,7 +23,4 @@ jobs:
         run: npm install
 
       - name: Build Docker Image
-        run: docker build -t finance-tracker:latest
-        
-      - name: Test API Health (Mock)
-        run: node -e "console.log('All endpoints verified!')" .
+        run: docker build -t finance-tracker:latest .
